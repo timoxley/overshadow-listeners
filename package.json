@@ -1,12 +1,28 @@
 {
   "name": "overshadow-listeners",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Add an event listener before existing listeners.",
   "main": "index.js",
   "scripts": {
     "test": "node test/test.js"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/timoxley/overshadow-listeners.git"
+  },
   "author": "Tim Oxley",
-  "license": "MIT"
+  "license": "MIT",
+  "readmeFilename": "Readme.md",
+  "gitHead": "9406058e6e2c7d5ef6afd907c7b601f7bf4ce8d0",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "keywords": [
+    "event",
+    "emitter"
+  ],
+  "bugs": {
+    "url": "https://github.com/timoxley/overshadow-listeners/issues"
+  }
 }
