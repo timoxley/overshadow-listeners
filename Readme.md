@@ -4,6 +4,7 @@ Add an event listener before existing listeners.
 
 ## Example
 
+```js
 var http = require('http')
 var overshadow = require('overshadow-listeners')
 
@@ -19,6 +20,8 @@ overshadow(server, 'request', function(req, res) {
 })
 
 server.listen(9000)
+
+```
 
 # Licence
 
