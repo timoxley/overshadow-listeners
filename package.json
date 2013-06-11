@@ -1,0 +1,12 @@
+{
+  "name": "overshadow-listeners",
+  "version": "0.0.0",
+  "description": "Add an event listener before existing listeners.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": "",
+  "author": "Tim Oxley",
+  "license": "MIT"
+}
