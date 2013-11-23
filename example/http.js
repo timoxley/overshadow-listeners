@@ -7,7 +7,7 @@ var server = http.createServer(function(req, res) {
 })
 
 
-overshadow(server, 'request', function(req, res) {
+overshadow(server)('request', function(req, res) {
   // happens before any other request handlers
   // including the handler supplied to
   // http.createServer

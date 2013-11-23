@@ -12,13 +12,13 @@ this ordering and require certain listeners to definitely run before any others.
 
 ```js
 var http = require('http')
-var overshadow = require('overshadow-listeners')
+var Overshadow = require('overshadow-listeners')
 
 var server = http.createServer(function(req, res) {
   res.end('ok!')
 })
 
-overshadow(server, 'request', function(req, res) {
+Overshadow(server)('request', function(req, res) {
   // happens before any other request handlers
   // including the handler supplied to
   // http.createServer
@@ -26,6 +26,25 @@ overshadow(server, 'request', function(req, res) {
 })
 
 server.listen(9000)
+
+```
+
+### detach/reattach
+
+Alternatively, manually detach and reattach listeners:
+
+```js
+
+var overshadow = Overshadow(server)
+overshadow.detach('request')
+
+// attach whatever listeners you need
+server.on('request', function(req, res) {
+  if (req.url !== '/') return res.end('no.')
+})
+
+// remember to reattach old listeners
+overshadow.reattach('request')
 
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "overshadow-listeners",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Add an event listener before existing listeners.",
   "main": "index.js",
   "scripts": {
@@ -24,5 +24,8 @@
   ],
   "bugs": {
     "url": "https://github.com/timoxley/overshadow-listeners/issues"
+  },
+  "devDependencies": {
+    "tape": "~2.3.0"
   }
 }
