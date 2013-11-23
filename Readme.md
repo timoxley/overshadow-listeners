@@ -18,11 +18,14 @@ var server = http.createServer(function(req, res) {
   res.end('ok!')
 })
 
-Overshadow(server)('request', function(req, res) {
-  // happens before any other request handlers
-  // including the handler supplied to
-  // http.createServer
+Overshadow(server).on('request', function(req, res) {
+  // This handler runs before any other request handlers
+  // (including the handler supplied to http.createServer!)
   if (req.url !== '/') return res.end('no.') // reject any requests other than those for '/'
+})
+
+Overshadow(server).once('request', function(req, res) {
+  // happens only once, before any other request handlers
 })
 
 server.listen(9000)

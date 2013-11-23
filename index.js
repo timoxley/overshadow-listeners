@@ -1,14 +1,14 @@
 module.exports = function(emitter) {
-  var oldListeners = {}
-  function overshadow(event, handler) {
+  var oldListeners = Object.create(null)
+  function on(event, handler) {
     detach(event)
-    emitter.addListener(event, handler);
+    emitter.addListener(event, handler)
     reattach(event)
   }
 
   function once(event, handler) {
     detach(event)
-    emitter.once(event, handler);
+    emitter.once(event, handler)
     reattach(event)
   }
 
@@ -25,10 +25,10 @@ module.exports = function(emitter) {
     emitter.removeAllListeners(event);
   }
 
-  overshadow.overshadow = overshadow
-  overshadow.once = once
-  overshadow.detach = detach
-  overshadow.reattach = reattach
+  on.on = on
+  on.once = once
+  on.detach = detach
+  on.reattach = reattach
 
-  return overshadow
+  return on
 }

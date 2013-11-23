@@ -10,14 +10,14 @@ test('overshadowing', function(t) {
   t.plan(3)
 
   var emitter = new EventEmitter()
-  var count = 0
+  var order = 0
 
   emitter.once('ping', function() {
-    t.equal(++count, 2, 'should happen after overshadowed listener.')
+    t.equal(++order, 2, 'should happen after overshadowed listener.')
   })
 
   emitter.once('ping', function() {
-    t.equal(++count, 3, 'should happen after first listener.')
+    t.equal(++order, 3, 'should happen after first listener.')
 
     // wait for bad events then end
     setTimeout(function() {
@@ -27,8 +27,8 @@ test('overshadowing', function(t) {
 
   })
 
-  Overshadow(emitter)('ping', function() {
-    t.equal(++count, 1, 'overshadowed listener called')
+  Overshadow(emitter).on('ping', function() {
+    t.equal(++order, 1, 'overshadowed listener called')
   })
 
   var timeout = setTimeout(function() {
@@ -38,18 +38,37 @@ test('overshadowing', function(t) {
   emitter.emit('ping')
 })
 
+
+test('once', function(t) {
+  t.plan(1)
+  var emitter = new EventEmitter()
+  Overshadow(emitter).once('ping', function() {
+    t.ok(true, 'overshadowed listener called')
+  })
+
+  setTimeout(function() {
+    t.end()
+  }, 10)
+
+  emitter.emit('ping')
+  emitter.emit('ping')
+  setTimeout(function() {
+    emitter.emit('ping')
+  }, 5)
+})
+
 test('detach reattach', function(t) {
   t.plan(3)
 
   var emitter = new EventEmitter()
-  var count = 0
+  var order = 0
 
   emitter.once('ping', function() {
-    t.equal(++count, 2, 'should happen after overshadowed listener.')
+    t.equal(++order, 2, 'should happen after overshadowed listener.')
   })
 
   emitter.once('ping', function() {
-    t.equal(++count, 3, 'should happen after first listener.')
+    t.equal(++order, 3, 'should happen after first listener.')
 
     // wait for bad events then end
     setTimeout(function() {
@@ -64,7 +83,7 @@ test('detach reattach', function(t) {
   overshadow.detach('ping')
 
   emitter.once('ping', function() {
-    t.equal(++count, 1, 'overshadowed listener called')
+    t.equal(++order, 1, 'overshadowed listener called')
   })
 
   overshadow.reattach('ping')
