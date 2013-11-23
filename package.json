@@ -12,8 +12,6 @@
   },
   "author": "Tim Oxley",
   "license": "MIT",
-  "readmeFilename": "Readme.md",
-  "gitHead": "9406058e6e2c7d5ef6afd907c7b601f7bf4ce8d0",
   "directories": {
     "example": "example",
     "test": "test"
@@ -27,5 +25,6 @@
   },
   "devDependencies": {
     "tape": "~2.3.0"
-  }
+  },
+  "homepage": "https://github.com/timoxley/overshadow-listeners"
 }
