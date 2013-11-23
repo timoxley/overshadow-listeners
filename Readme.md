@@ -48,6 +48,11 @@ overshadow.reattach('request')
 
 ```
 
+## Also See
+
+* [hughsk/on-first](https://github.com/hughsk/on-first)
+
+
 # Licence
 
 MIT
