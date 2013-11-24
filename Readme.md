@@ -1,7 +1,13 @@
 #overshadow-listeners
 [![Build Status](https://travis-ci.org/timoxley/overshadow-listeners.png?branch=master)](https://travis-ci.org/timoxley/overshadow-listeners)
 
-Add an event listener before existing listeners.
+Add an event listener before any existing listeners.
+
+```js
+Overshadow(emitter).on('event', function() {
+  // this handler will run before any other handlers for 'event'
+})
+```
 
 ## Why
 
