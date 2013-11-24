@@ -4,6 +4,22 @@
 Add an event listener before any existing listeners.
 
 ```js
+Overshadow(emitter).on('event', function() {
+  // this handler will run before any other handlers for 'event'
+  console.log('overshadowed!')
+})
+```
+
+## Why
+
+Event listeners always fire in the order they are added, yet sometimes we have no control over
+this ordering and require certain listeners to definitely run before any others.
+
+## Example
+
+```js
+var emitter = new EventEmitter()
+
 emitter.on('event', function() {
   console.log('added first')
 })
@@ -35,12 +51,7 @@ emitter.emit('event')
 // Note overshadow handler fires first, even though it was added last!
 ```
 
-## Why
-
-Event listeners always fire in the order they are added, yet sometimes we have no control over
-this ordering and require certain listeners to definitely run before any others.
-
-## Example
+### ensure http request handler is handled first
 
 ```js
 var http = require('http')
@@ -63,7 +74,7 @@ Overshadow(server).once('request', function(req, res) {
 server.listen(9000)
 ```
 
-### detach/reattach
+### explicit detach/reattach
 
 Alternatively, manually detach and reattach listeners:
 
