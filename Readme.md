@@ -29,7 +29,6 @@ Overshadow(server).once('request', function(req, res) {
 })
 
 server.listen(9000)
-
 ```
 
 ### detach/reattach
@@ -37,7 +36,6 @@ server.listen(9000)
 Alternatively, manually detach and reattach listeners:
 
 ```js
-
 var overshadow = Overshadow(server)
 overshadow.detach('request')
 
@@ -46,10 +44,25 @@ server.on('request', function(req, res) {
   if (req.url !== '/') return res.end('no.')
 })
 
-// remember to reattach old listeners
 overshadow.reattach('request')
-
+// remember to reattach old listeners
 ```
+
+#### detach/reattach is chainable
+
+We've included a simple `.then(fn)` method you can call to make chainable the process of detaching, doing something then reattaching. `.then(fn)` does nothing but execute the supplied function
+
+```js
+Overshadow(server)
+.detach('request')
+.then(function() { // '.then' executes supplied fn & returns chain 
+  server.once('request', function(req, res) {
+    if (req.url !== '/') return res.end('no.')
+  })
+})
+.reattach('request') // remember to reattach old listeners
+```
+
 
 ## Also See
 

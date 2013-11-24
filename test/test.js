@@ -57,7 +57,7 @@ test('once', function(t) {
   }, 5)
 })
 
-test('detach reattach', function(t) {
+test('chainable detach reattach', function(t) {
   t.plan(3)
 
   var emitter = new EventEmitter()
@@ -78,15 +78,16 @@ test('detach reattach', function(t) {
 
   })
 
-  var overshadow = Overshadow(emitter)
 
-  overshadow.detach('ping')
-
-  emitter.once('ping', function() {
-    t.equal(++order, 1, 'overshadowed listener called')
+  Overshadow(emitter)
+  .detach('ping')
+  .then(function() {
+    emitter.once('ping', function() {
+      t.equal(++order, 1, 'overshadowed listener called')
+    })
   })
+  .reattach('ping')
 
-  overshadow.reattach('ping')
 
   var timeout = setTimeout(function() {
     t.fail('tests timed out!')
