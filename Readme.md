@@ -4,9 +4,35 @@
 Add an event listener before any existing listeners.
 
 ```js
+emitter.on('event', function() {
+  console.log('added first')
+})
+
+emitter.on('event', function() {
+  console.log('added second')
+})
+
+emitter.emit('event')
+
+// console output:
+//   added first
+//   added second
+
+// Note event handlers fire in order they were added.
+
 Overshadow(emitter).on('event', function() {
   // this handler will run before any other handlers for 'event'
+  console.log('overshadowed!')
 })
+
+emitter.emit('event')
+
+// console output:
+//   overshadowed!
+//   added first
+//   added second
+
+// Note overshadow handler fires first, even though it was added last!
 ```
 
 ## Why
